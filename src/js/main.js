@@ -10,30 +10,69 @@ const spanDoneTask = document.querySelector('.done__value');
 const spanDoneTaskTwo = document.querySelector('.done__total');
 const explanations = document.querySelector('.explanations');
 
-let arrayTask = [];
-function Task(id, text, status) {
-	this.id;
-	this.text;
-	this.status;
+
+function Task(text, status) {
+	this.id = Date.now();
+	this.text = text;
+	this.status = status;
+}
+function TaskService() {
+	let tasks = [];
+
+	function addTask(text, status = false) {
+		tasks.push(new Task(text, status))
+	}
+
+	function removeTask(id) {
+		tasks = tasks.filter((task) => task.id !== id)
+	}
+
+	function updateTask(id, newTask) {
+		tasks = tasks.map((task) => {
+			return task.id === id ? {
+				...task,
+				...newTask
+			} : task
+		})
+	}
+
+	function getAllTask() {
+		return tasks
+	}
+
+	function getTask(id) {
+		return tasks.filter((task) => task.id === id)[0]
+	}
+
+	return {
+		addTask: addTask,
+		removeTask: removeTask,
+		updateTask: updateTask,
+		getAllTask: getAllTask,
+		getTask: getTask
+	}
 }
 
-function creationObjectTask() {
-	let task = new Task();
-	task.id = Date.now();
-	task.text = todoInput.value;
-	task.status = false;
+const taskService = new TaskService()
+
+
+
+const arrayTask = [];
+
+
+function creationObjectTask(text = todoInput.value, status = false) {
+	const task = new Task(text, status);
 	arrayTask.push(task);
 	return task;
 }
 
 function render(where, element) {
-	let drawElement = element
 	where.append(element);
-	return drawElement
+	return element
 }
 
 function renderCheck() {
-	let check = document.createElement('input');
+	const check = document.createElement('input');
 	check.setAttribute('type', 'checkbox');
 	check.setAttribute('value', 'false');
 	check.classList.add('custom-checkbox__input');
@@ -41,7 +80,7 @@ function renderCheck() {
 }
 
 function renderP() {
-	let pTask = document.createElement('p');
+	const pTask = document.createElement('p');
 	pTask.classList.add('todo__p');
 	pTask.textContent = todoInput.value;
 	return pTask
@@ -131,4 +170,5 @@ function renderTask() {
 }
 
 renderTask();
+
 
