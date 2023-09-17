@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./normalize.css">
+	<link rel="stylesheet" href="./vars.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./main.css">
+	<title>ToDo</title>
+</head>
+
+<body>
+	<header class="header">
+		<div class="container">
+			<div class="logo">
+				<div class="logo__image">
+					<img src="./img/rocket.svg" alt="">
+					<img src="./img/logo.svg" alt="">
+				</div>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div class="container">
+			<div class="todo__wrapper">
+				<div class="todo__header">
+					<input class="todo__input" type="text" placeholder="Добавить задачу">
+					<button class="todo__btn btn-reset">Создать</button>
+				</div>
+				<div class="todo__body">
+					<div class="todo__descr">
+						<div class="todo__info info">
+								<span class="info__text">Созданные задачи</span>
+								<span class="info__value">0</span>
+						</div>
+						<div class="todo__done done">
+							<span class="done__text">Завершенные задачи</span>
+							<span class="done__content">
+								<span class="done__value">0</span>
+								<span class="done__total"></span>
+							</span>
+						</div>
+					</div>
+					<div class="todo__task">
+						<div class="explanations">
+							<div class="explanations__image"></div>
+							<p class="explanations__descr"><span>У вас еще нет зарегистрированных задач</span></p>
+							<p class="explanations__descr">Создавайте задачи и организуйте свои дела</p>
+						</div>
+						<ul class="todo__list list-reset">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script src="./index1.js"></script>
+
+</body>
+
+</html>
