@@ -1,0 +1,258 @@
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+.btn-reset {
+	border: none;
+	padding: 0;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.list-reset {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: var(--font-family);
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 140%;
+	color: var(--gray-100);
+}
+
+.container {
+	width: 736px;
+	margin: 0 auto;
+}
+
+.header {
+	padding: 82px 0;
+	background-color: var(--gray-700);
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.logo__image {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.todo__header {
+	position: relative;
+	top: -30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 64px;
+}
+
+.todo__input {
+	border: 1px solid var(--gray-700);
+	border-radius: 8px;
+	width: 606px;
+	background: var(--gray-500);
+	color: var(--gray-100);
+	padding: 16px;
+}
+
+.todo__input::placeholder {
+	color: var(--gray-300);
+}
+
+.todo__btn {
+	padding: 16px 10px;
+	position: relative;
+	border-radius: 8px;
+	background: var(--blue-dark);
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 140%;
+	color: var(--gray-100);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.todo__btn:hover {
+	background-color: var(--purpledark);
+}
+
+.todo__btn:active {
+	transform: translateY(3px);
+}
+
+.todo__btn::after {
+	content: "";
+	width: 16px;
+	height: 16px;
+	background-image: url(../img/plus.svg);
+	object-fit: cover;
+}
+
+main {
+	background: var(--gray-600);
+	min-height: 100vh;
+}
+
+.todo__descr {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 25px;
+}
+
+.info__text,
+.done__text {
+	font-weight: 700;
+	font-size: 14px;
+	color: var(--blue);
+}
+
+.done__text {
+	color: var(--purple);
+}
+
+.todo__done {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.todo__task {
+	padding: 64px 0;
+	border-radius: 8px;
+	border-top: 1px solid var(--Grey-400, #333);
+}
+
+.explanations {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.explanations__image {
+	width: 56px;
+	height: 56px;
+	background-image: url(../img/clipboard.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-bottom: 16px;
+}
+
+.explanations__descr {
+	margin: 0;
+	color: var(--gray-300);
+}
+
+.explanations__descr>span {
+	font-weight: 700;
+}
+
+.todo__item {
+	position: relative;
+	width: 100%;
+	padding: 16px;
+	padding-left: 44px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	border-radius: 8px;
+	border: 1px solid var(--gray-400);
+	background: var(--gray-500);
+	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.06);
+}
+
+.todo__item>p {
+	overflow: hidden;
+	margin: 0;
+	width: 100%;
+	word-wrap: break-word;
+}
+
+.todo__item:not(:last-child) {
+	margin-bottom: 12px;
+}
+
+.btn-remove {
+	padding: 6px;
+	width: 24px;
+	height: 24px;
+	background-image: url(../img/trash.svg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: #808080;
+	transition: transform 0.3s ease-in-out;
+}
+
+.btn-remove:hover {
+	transform: translateY(2px);
+}
+
+.custom-checkbox__input {
+	position: absolute;
+	left: 16px;
+	top: 20px;
+}
+
+.custom-checkbox__input:before {
+	position: absolute;
+	left: -3px;
+	top: -3px;
+	background-color: var(--gray-500);
+	display: inline-block;
+	border: 1px solid var(--blue);
+	border-radius: 100%;
+	width: 18px;
+	height: 18px;
+	content: close-quote;
+}
+
+.custom-checkbox__input:checked:before {
+	width: 18px;
+	height: 18px;
+	border-color: transparent;
+	background-image: url("../img/check.svg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.delete__p {
+	color: var(--gray-300);
+	text-decoration: line-through;
+}
+
+.done__content,
+.info__value {
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: var(--gray-400);
+
+}
+
+.info__value,
+.done__value,
+.done__total {
+	font-weight: 700;
+	font-size: 12px;
+	color: var(--gray-200);
+}
