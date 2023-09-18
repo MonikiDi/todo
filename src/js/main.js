@@ -52,60 +52,6 @@ function TaskService() {
 	}
 }
 
-
-
-
-
-
-function template(task) {
-	return `
-		<li class="todo__item custom-checkbox__text">
-			<input id="done_task_${task.id}" type="checkbox" class="custom-checkbox__input" ${task.status && 'checked'}>
-			<p class="todo__p ${task.status && 'delete__p'}">${task.text}</p>
-			<button id="delete_${task.id}" class="btn-remove btn-reset"></button>
-		</li>
-	`
-}
-
-let listener = [];
-
-function renderTasks(taskService) {
-	const tasks = taskService.getAllTask();
-
-	listener.forEach((unsubscribe) => unsubscribe());
-	listener = [];
-
-	todoList.innerHTML = '';
-	explanations.remove()
-
-	spanValue.textContent = tasks.length.toString()
-	spanDoneTask.textContent = tasks.filter(({status}) => status).length.toString()
-	spanDoneTaskTwo.textContent = `из ${tasks.length}`;
-
-	if(!tasks.length) {
-		return todoTask.append(explanations)
-	}
-
-
-
-	todoList.innerHTML = tasks.map(template).join('')
-	tasks.forEach((task) => {
-		const nodeDelete = todoList.querySelector(`#delete_${task.id}`)
-		const nodeDone = todoList.querySelector(`#done_task_${task.id}`)
-
-		listener.push(addEvent(nodeDelete, 'click', () => {
-			taskService.removeTask(task.id);
-			renderTasks(taskService)
-		}))
-		listener.push(addEvent(nodeDone, 'click', (event) => {
-			taskService.updateTask(task.id, {
-				status: event.target.checked
-			});
-			renderTasks(taskService)
-		}))
-	})
-}
-
 function addEvent(el, trigger, cb) {
 	el.addEventListener(trigger, cb)
 
@@ -114,16 +60,85 @@ function addEvent(el, trigger, cb) {
 	}
 }
 
+function TaskComponent(taskService) {
+	this.listener = [];
+	this.taskService = taskService;
+
+	function templateTask(task) {
+		return `
+		<li class="todo__item custom-checkbox__text">
+			<input id="done_task_${task.id}" type="checkbox" class="custom-checkbox__input" ${task.status && 'checked'}>
+			<p class="todo__p ${task.status && 'delete__p'}">${task.text}</p>
+			<button id="delete_${task.id}" class="btn-remove btn-reset"></button>
+		</li>
+	`
+	}
+
+	const renderTasks = () => {
+		eventUnsubscription();
+
+		clear();
+		renderInfoTask();
+
+		const tasks = this.taskService.getAllTask();
+		if(!tasks.length) {
+			return todoTask.append(explanations)
+		}
+
+		todoList.innerHTML = tasks.map(templateTask).join('')
+
+		eventSubscription(tasks)
+	}
+
+	const clear = () => {
+		todoList.innerHTML = '';
+		explanations.remove()
+	}
+
+	const renderInfoTask =() => {
+		const tasks = this.taskService.getAllTask();
+		spanValue.textContent = tasks.length.toString()
+		spanDoneTask.textContent = tasks.filter(({status}) => status).length.toString()
+		spanDoneTaskTwo.textContent = `из ${tasks.length}`;
+	}
+
+	const  eventUnsubscription =() => {
+		this.listener.forEach((unsubscribe) => unsubscribe())
+		this.listener = [];
+	}
+
+	const eventSubscription = () => {
+		this.taskService.getAllTask().forEach((task) => {
+			const nodeDelete = todoList.querySelector(`#delete_${task.id}`)
+			const nodeDone = todoList.querySelector(`#done_task_${task.id}`)
+
+			this.listener.push(addEvent(nodeDelete, 'click', () => {
+				this.taskService.removeTask(task.id);
+				renderTasks(taskService)
+			}))
+			this.listener.push(addEvent(nodeDone, 'click', (event) => {
+				this.taskService.updateTask(task.id, {
+					status: event.target.checked
+				});
+				renderTasks(taskService)
+			}))
+		})
+	}
+
+	return {
+		render: renderTasks.bind(this)
+	}
+}
+
 function app() {
 	const taskService = new TaskService();
+	const component = new TaskComponent(taskService);
+
+	component.render();
 
 	btnInput.addEventListener('click', () => {
-
-		console.log(explanations)
-
-		taskService.addTask(todoInput.value);
-
-		renderTasks(taskService);
+		taskService.addTask(todoInput.value)
+		component.render()
 	})
 }
 
