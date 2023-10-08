@@ -172,7 +172,7 @@ main {
 	padding: 16px;
 	padding-left: 44px;
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-between;
 	border-radius: 8px;
 	border: 1px solid var(--gray-400);
@@ -181,7 +181,6 @@ main {
 }
 
 .todo__item>p {
-	overflow: hidden;
 	margin: 0;
 	width: 100%;
 	word-wrap: break-word;
@@ -189,6 +188,17 @@ main {
 
 .todo__item:not(:last-child) {
 	margin-bottom: 12px;
+}
+
+.btn-edit {
+	color: var(--gray-100);
+	margin-right: 10px;
+	transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.btn-edit:hover {
+	color: var(--purple);
+	transform: translateY(2px);
 }
 
 .btn-remove {
@@ -209,14 +219,16 @@ main {
 
 .custom-checkbox__input {
 	position: absolute;
-	left: 16px;
-	top: 20px;
+	left: 15px;
+	top: 50%;
+	transform: translate(0,-50%);
 }
 
 .custom-checkbox__input:before {
 	position: absolute;
-	left: -3px;
-	top: -3px;
+	top: 50%;
+	left: -2px;
+	transform: translate(0,-50%);
 	background-color: var(--gray-500);
 	display: inline-block;
 	border: 1px solid var(--blue);
@@ -255,4 +267,22 @@ main {
 	font-weight: 700;
 	font-size: 12px;
 	color: var(--gray-200);
+}
+
+/* EDIT */
+.todo__p {
+	display: flex;
+	gap: 20px;
+	margin-right: 10px;
+}
+
+.todo__input--edit {
+	width: 400px;
+
+}
+
+.todo__btn--edit {}
+
+.todo__btn--edit::after {
+	display: none;
 }
